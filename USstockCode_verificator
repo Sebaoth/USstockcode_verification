@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Verification Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Code Verification Portal</h1>
+        <input type="text" id="codeInput" placeholder="Enter your code">
+        <button onclick="verifyCode()">Verify</button>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        const validCodes = [
+            "US1495-A040-948G-F01C2024", "US3A71-AG26-GBC8-BE742024", "USA0BE-0A1G-D07F-FCED2024", "USB2C8-1B27-GE4C-5D982024", "US7B32-6A49-G365-0AF12024", "USE39E-99A2-D32E-CAE02024", "US2EA4-7E84-G601-499A2024", "USB6EF-F6D2-486G-79DF2024", "US8A21-4GF3-6B6C-00BG2024", "US5077-203E-F7A0-0C242024", "US99C9-2DBF-9CDE-A15F2024", "US2GC0-B556-03CC-1C7F2024", "USF8B2-2C2A-DF9C-69582024", "US36E7-DC36-BCA2-FA812024", "USBA55-C7E0-8B51-54AA2024", "USC969-3CBG-6AF9-61842024", "USBD28-000D-A0G8-C6DA2024", "USG923-11B0-CBG2-AEG52024", "USE55G-4C38-0607-85G82024", "USDF3F-97BC-2786-FD202024", "US7214-F141-1684-C5D52024", "US2F21-4349-07AA-75EE2024", "US4B15-3B08-DC2C-CC632024", "US44B3-GADA-9131-68582024", "US3CD7-D6ED-60FG-E3CA2024", "US4DA6-51D7-8112-2B162024", "US2B98-29A0-3861-38522024", "USDB98-F0A5-2592-5FBB2024", "USEB37-40A3-8318-2C0C2024", "USDBD7-4736-43EG-D44G2024", "US1230-A656-7C9G-85052024", "US3839-D35C-9227-62432024", "USC9D8-9736-08D3-6BBC2024", "USF311-7096-1984-A2F92024", "USC5GD-15DB-4392-F6072024", "USGD47-328A-D5EG-643G2024", "USC63F-573D-15A8-D0A42024", "USD0DC-D773-5881-69152024", "USB169-808F-BEG2-85GF2024", "US27EG-4428-57B9-03AA2024", "USBD7A-2E31-932C-C7F52024", "USAG07-21GE-16AE-9AED2024", "USE073-67FF-E513-FBDB2024", "US9240-F081-47E6-4BEF2024", "USB713-244C-11B7-GEF52024", "US0B79-3G01-3EG0-B5252024", "US41G8-6A20-8E09-E1GA2024", "USEG2C-F3C4-4FC1-07842024", "US5264-G907-21EG-EEF52024", "US13G3-D4AB-GF74-DD5D2024", "USB388-A0FB-EG03-E2CF2024", "USB519-2BDA-326A-83A62024", "USAA9D-172B-C400-19EB2024", "US0D47-2BE8-5A30-C6F22024", "US5FE5-33B5-AD75-5B952024", "US2C3F-24CG-D5C4-6E732024", "US4E90-B40F-9CC9-13F52024", "US17C8-E4C8-8D9G-A6D12024", "US17DF-F2D5-065A-91272024", "USB7DA-34A4-9010-2G9D2024", "US617G-FBCD-4D97-076C2024", "USG26D-47F2-45GE-63F82024", "USF6EB-4D10-AD01-ABC12024", "US5FEE-4G74-09B1-F5962024", "USF458-EA69-9013-19F62024", "US649E-76CG-63AF-833D2024", "USE4C2-DFD6-G713-3DF82024", "US7991-D633-3584-6BA62024", "USFD11-8ACB-45CD-F4902024", "USBG4G-A586-F0GA-423A2024", "US1CE6-30B6-C3E6-F6242024", "USEE86-4513-06F9-67CB2024", "USA04C-5CG4-8654-6F0G2024", "US5995-BC5D-17CB-1D552024", "US7208-F327-2C93-A4F12024", "US17BA-F34E-CG0B-12E82024", "US2DAE-G86F-562E-7B8B2024", "US403C-5B64-C2B5-C9E82024", "US0836-EB95-DA2D-33C92024", "US37D1-0D06-61F3-34G72024", "US740F-4G86-D376-575E2024", "USE493-F64C-EB04-AC322024", "US6ED5-A91A-82C8-E4DD2024", "USBD58-21GC-7CDF-B2312024", "USEDFD-523A-6D07-74112024", "US703G-GB77-C2F5-44F92024", "USG654-9B7C-BEF3-29F22024", "USCC41-277G-33GE-F2GA2024", "US68BE-27C2-3175-7AB52024", "US6G16-561E-8G98-8C842024", "US3B09-AF5B-7BF4-1EB72024", "US09F4-CE24-0F12-817D2024", "US512D-
